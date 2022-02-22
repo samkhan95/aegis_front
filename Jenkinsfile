@@ -1,6 +1,6 @@
 node{
     stage("SCM Checkout"){
-        git 'https://github.com/samkhan95/aegis-front.git'
+        git 'https://github.com/samkhan95/aegis_front.git'
     }
     stage("Buildind the image"){
         sh 'sudo docker build -t samad095/aegis_front .'
