@@ -11,4 +11,6 @@ node{
         }
         sh 'sudo docker push samad095/aegis_front'
     }
+    
+    
 }
