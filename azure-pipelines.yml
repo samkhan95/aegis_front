@@ -18,7 +18,7 @@ steps:
     acrName: 'mytesdockregistry'
     acrUsername: 'mytesdockregistry'
     acrPassword: 'trFBbNSbNy5JIF98gT29OKmmjiePz2zY8LriEys5r8+ACRB3J/f/'
-    dockerfilePath: '.'
+    dockerfilePath: 'Dockerfile'
     imageToBuild: 'mytesdockregistry.azurecr.io/app/aegis'
     imageToDeploy: 'mytesdockregistry.azurecr.io/app/aegis'
     containerAppName: 'mytestappsvc'
