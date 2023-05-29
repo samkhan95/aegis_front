@@ -1,5 +1,5 @@
 {
-  "name": "aegis-ui",
+  "name": "aegis-frontend",
   "version": "0.1.0",
   "dependencies": {
     "@date-io/date-fns": "^1.3.13",
