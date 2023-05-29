@@ -16,6 +16,6 @@ steps:
     azureSubscription: 'rgconn'
     appName: 'mytestappsvc'
     containers: 'mytesdockregistry.azurecr.io/app/aegis:latest'
-    appSettings: '-PORT 80 -DOCKER_REGISTRY_SERVER_PASSWORD ${acr-pass} -DOCKER_REGISTRY_SERVER_URL https://mytesdockregistry.azurecr.io -DOCKER_REGISTRY_SERVER_USERNAME mytesdockregistry''
+    appSettings: '-PORT 80 -DOCKER_REGISTRY_SERVER_PASSWORD ${acr-pass} -DOCKER_REGISTRY_SERVER_URL https://mytesdockregistry.azurecr.io -DOCKER_REGISTRY_SERVER_USERNAME mytesdockregistry'
 
 
