@@ -1,4 +1,5 @@
 # Starter pipeline
+
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
@@ -29,4 +30,4 @@ steps:
     command: 'publish'
     verbose: true
     publishRegistry: 'useFeed'
-    publishFeed: 'bb88b96b-2ebe-4be6-b48e-6844d88d4884/076fe652-5d4c-4aac-9d81-7cbf16d30e7f'
+    publishFeed: '200edbc6-24d3-4f4c-9d0f-2d1d879379f4'
