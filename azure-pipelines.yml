@@ -14,23 +14,33 @@ pool:
   name: 'Default'
   vmImage: ubuntu-latest
 
-steps:
-- task: Docker@2
-  inputs:
-    containerRegistry: 'acrconn'
-    repository: 'app/aegis'
-    command: 'buildAndPush'
-    Dockerfile: 'Dockerfile'
-    tags: 'latest'
-- task: AzureWebAppContainer@1
-  inputs:
-    azureSubscription: 'rgconn'
-    appName: 'mytestappsvc'
-    containers: 'mytesdockregistry.azurecr.io/app/aegis:latest'
-    appSettings: '-DOCKER_REGISTRY_SERVER_PASSWORD $(VMS_PASS) -DOCKER_REGISTRY_SERVER_URL https://mytesdockregistry.azurecr.io -DOCKER_REGISTRY_SERVER_USERNAME mytesdockregistry'
-- task: Npm@1
-  inputs:
-    command: 'publish'
-    verbose: true
-    publishRegistry: 'useFeed'
-    publishFeed: '200edbc6-24d3-4f4c-9d0f-2d1d879379f4'
+jobs:
+- job: build
+  displayName: 'Build the application'
+  steps:
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'acrconn'
+      repository: 'app/aegis'
+      command: 'buildAndPush'
+      Dockerfile: 'Dockerfile'
+      tags: '$(Build.BuildNumber)'
+  
+  - task: Npm@1
+    inputs:
+      command: 'publish'
+      verbose: true
+      publishRegistry: 'useFeed'
+      publishFeed: '6ca6ed9f-0408-4a5d-a7f4-5e62622db69f'
+
+- job: Deploy
+  displayName: 'Deployment to App Service'
+  dependsOn: 'build'
+  condition: succeeded('build')
+  steps:
+  - task: AzureWebAppContainer@1
+    inputs:
+      azureSubscription: 'rgconn'
+      appName: 'mytestappsvc'
+      containers: 'mytesdockregistry.azurecr.io/app/aegis:$(Build.BuildNumber)'
+      appSettings: '-DOCKER_REGISTRY_SERVER_PASSWORD $(VMS_PASS) -DOCKER_REGISTRY_SERVER_URL https://mytesdockregistry.azurecr.io -DOCKER_REGISTRY_SERVER_USERNAME mytesdockregistry'
