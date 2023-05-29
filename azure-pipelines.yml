@@ -11,19 +11,11 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: AzureContainerApps@1
+- task: AzureWebAppContainer@1
   inputs:
-    appSourcePath: '/'
     azureSubscription: 'rgconn'
-    acrName: 'mytesdockregistry'
-    acrUsername: 'mytesdockregistry'
-    acrPassword: 'trFBbNSbNy5JIF98gT29OKmmjiePz2zY8LriEys5r8+ACRB3J/f/'
-    dockerfilePath: 'Dockerfile'
-    imageToBuild: 'mytesdockregistry.azurecr.io/app/aegis'
-    imageToDeploy: 'mytesdockregistry.azurecr.io/app/aegis'
-    containerAppName: 'mytestappsvc'
-    resourceGroup: 'myRG'
-    runtimeStack: 'mcr.microsoft.com/oryx/node:16'
-    targetPort: '80'
+    appName: 'mytestappsvc'
+    containers: 'mytesdockregistry.azurecr.io/app/aegis:latest'
+    appSettings: '-PORT 80 -DOCKER_REGISTRY_SERVER_PASSWORD ${acr-pass} -DOCKER_REGISTRY_SERVER_URL https://mytesdockregistry.azurecr.io -DOCKER_REGISTRY_SERVER_USERNAME mytesdockregistry''
 
 
