@@ -18,6 +18,12 @@ jobs:
 - job: build
   displayName: 'Build the application'
   steps:
+  - task: Npm@1
+    inputs:
+      command: 'install'
+      verbose: true
+      customRegistry: 'useFeed'
+      customFeed: 'bb88b96b-2ebe-4be6-b48e-6844d88d4884/7b0bfe4f-ea88-4985-a177-9f69b009491d'
   - task: Docker@2
     inputs:
       containerRegistry: 'acrconn'
@@ -27,6 +33,7 @@ jobs:
       tags: '$(Build.BuildNumber)'
   
   - task: Npm@1
+    displayName: 'Publish dependencies to feed'
     inputs:
       command: 'publish'
       verbose: true
