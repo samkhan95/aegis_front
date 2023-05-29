@@ -31,7 +31,7 @@ jobs:
       command: 'publish'
       verbose: true
       publishRegistry: 'useFeed'
-      publishFeed: '6ca6ed9f-0408-4a5d-a7f4-5e62622db69f'
+      publishFeed: 'bb88b96b-2ebe-4be6-b48e-6844d88d4884/7b0bfe4f-ea88-4985-a177-9f69b009491d'
 
 - job: Deploy
   displayName: 'Deployment to App Service'
