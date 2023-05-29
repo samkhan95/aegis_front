@@ -4,6 +4,9 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+variables:
+  VMS_PASS: $(acr-pass)
+
 trigger:
 - master
 
@@ -24,7 +27,7 @@ steps:
     azureSubscription: 'rgconn'
     appName: 'mytestappsvc'
     containers: 'mytesdockregistry.azurecr.io/app/aegis:latest'
-    appSettings: '-DOCKER_REGISTRY_SERVER_PASSWORD $(acr-pass) -DOCKER_REGISTRY_SERVER_URL https://mytesdockregistry.azurecr.io -DOCKER_REGISTRY_SERVER_USERNAME mytesdockregistry'
+    appSettings: '-DOCKER_REGISTRY_SERVER_PASSWORD $(VMS_PASS) -DOCKER_REGISTRY_SERVER_URL https://mytesdockregistry.azurecr.io -DOCKER_REGISTRY_SERVER_USERNAME mytesdockregistry'
 - task: Npm@1
   inputs:
     command: 'publish'
