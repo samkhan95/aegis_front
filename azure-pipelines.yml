@@ -1,0 +1,42 @@
+# Starter pipeline
+- task: AzureContainerApps@1
+  inputs:
+    appSourcePath: '/'
+    azureSubscription: 'rgconn'
+    acrName: 'mytesdockregistry'
+    acrUsername: 'mytesdockregistry'
+    acrPassword: ${acr-pass}
+    dockerfilePath: '.'
+    imageToBuild: 'mytesdockregistry.azurecr.io/app/aegis'
+    imageToDeploy: 'mytesdockregistry.azurecr.io/app/aegis'
+    containerAppName: 'mytestappsvc'
+    resourceGroup: 'myRG'
+    runtimeStack: 'mcr.microsoft.com/oryx/node:16'
+    targetPort: '80'
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: AzureContainerApps@1
+  inputs:
+    appSourcePath: '/'
+    azureSubscription: 'rgconn'
+    acrName: 'mytesdockregistry'
+    acrUsername: 'mytesdockregistry'
+    acrPassword: 'trFBbNSbNy5JIF98gT29OKmmjiePz2zY8LriEys5r8+ACRB3J/f/'
+    dockerfilePath: '.'
+    imageToBuild: 'mytesdockregistry.azurecr.io/app/aegis'
+    imageToDeploy: 'mytesdockregistry.azurecr.io/app/aegis'
+    containerAppName: 'mytestappsvc'
+    resourceGroup: 'myRG'
+    runtimeStack: 'mcr.microsoft.com/oryx/node:16'
+    targetPort: '80'
+
+
