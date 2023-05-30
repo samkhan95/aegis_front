@@ -26,13 +26,13 @@ jobs:
       Dockerfile: 'Dockerfile'
       tags: '$(Build.BuildNumber)'
   
-  - task: Npm@1
-    displayName: 'Publish dependencies to feed'
-    inputs:
-      command: 'publish'
-      verbose: true
-      publishRegistry: 'useFeed'
-      publishFeed: 'bb88b96b-2ebe-4be6-b48e-6844d88d4884/7b0bfe4f-ea88-4985-a177-9f69b009491d'
+  # - task: Npm@1
+  #   displayName: 'Publish dependencies to feed'
+  #   inputs:
+  #     command: 'publish'
+  #     verbose: true
+  #     publishRegistry: 'useFeed'
+  #     publishFeed: 'bb88b96b-2ebe-4be6-b48e-6844d88d4884/7b0bfe4f-ea88-4985-a177-9f69b009491d'
 
 - job: Deploy
   displayName: 'Deployment to App Service'
