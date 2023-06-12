@@ -21,7 +21,6 @@ steps:
     verbose: true
     publishRegistry: 'useFeed'
     publishFeed: '535085bf-b9c7-4396-8e78-18ddb3ffd6cb/990c7521-444f-49eb-b7aa-0cf11e97fabf'
-
 # jobs:
 # - job: build
 #   displayName: 'Build the application'
