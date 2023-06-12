@@ -14,17 +14,25 @@ pool:
   name: 'Default'
   vmImage: ubuntu-latest
 
-jobs:
-- job: build
-  displayName: 'Build the application'
-  steps:
-  - task: Docker@2
-    inputs:
-      containerRegistry: 'acrconn'
-      repository: 'app/aegis'
-      command: 'buildAndPush'
-      Dockerfile: 'Dockerfile'
-      tags: '$(Build.BuildNumber)'
+steps:
+- task: Npm@1
+  inputs:
+    command: 'publish'
+    verbose: true
+    publishRegistry: 'useFeed'
+    publishFeed: '535085bf-b9c7-4396-8e78-18ddb3ffd6cb/990c7521-444f-49eb-b7aa-0cf11e97fabf'
+
+# jobs:
+# - job: build
+#   displayName: 'Build the application'
+  # steps:
+  # - task: Docker@2
+  #   inputs:
+  #     containerRegistry: 'acrconn'
+  #     repository: 'app/aegis'
+  #     command: 'buildAndPush'
+  #     Dockerfile: 'Dockerfile'
+  #     tags: '$(Build.BuildNumber)'
   
   # - task: Npm@1
   #   displayName: 'Publish dependencies to feed'
@@ -34,14 +42,14 @@ jobs:
   #     publishRegistry: 'useFeed'
   #     publishFeed: 'bb88b96b-2ebe-4be6-b48e-6844d88d4884/7b0bfe4f-ea88-4985-a177-9f69b009491d'
 
-- job: Deploy
-  displayName: 'Deployment to App Service'
-  dependsOn: 'build'
-  condition: succeeded('build')
-  steps:
-  - task: AzureWebAppContainer@1
-    inputs:
-      azureSubscription: 'rgconn'
-      appName: 'mytestappsvc'
-      containers: 'mytesdockregistry.azurecr.io/app/aegis:$(Build.BuildNumber)'
-      appSettings: '-DOCKER_REGISTRY_SERVER_PASSWORD $(VMS_PASS) -DOCKER_REGISTRY_SERVER_URL https://mytesdockregistry.azurecr.io -DOCKER_REGISTRY_SERVER_USERNAME mytesdockregistry'
+# - job: Deploy
+#   displayName: 'Deployment to App Service'
+#   dependsOn: 'build'
+#   condition: succeeded('build')
+#   steps:
+#   - task: AzureWebAppContainer@1
+#     inputs:
+#       azureSubscription: 'rgconn'
+#       appName: 'mytestappsvc'
+#       containers: 'mytesdockregistry.azurecr.io/app/aegis:$(Build.BuildNumber)'
+#       appSettings: '-DOCKER_REGISTRY_SERVER_PASSWORD $(VMS_PASS) -DOCKER_REGISTRY_SERVER_URL https://mytesdockregistry.azurecr.io -DOCKER_REGISTRY_SERVER_USERNAME mytesdockregistry'
